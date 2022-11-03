@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onlineplatform.proincorruptiblealliance.mapper.ModularDictMapper">
+  <resultMap id="BaseResultMap" type="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    <id column="modular_id" jdbcType="INTEGER" property="modularId" />
+    <result column="modular_name" jdbcType="VARCHAR" property="modularName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    modular_id, modular_name
+  </sql>
+  <select id="selectByExample" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDictExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from modular_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from modular_dict
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from modular_dict
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDictExample">
+    delete from modular_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    insert into modular_dict (modular_id, modular_name)
+    values (#{modularId,jdbcType=INTEGER}, #{modularName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    insert into modular_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modularId != null">
+        modular_id,
+      </if>
+      <if test="modularName != null">
+        modular_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modularId != null">
+        #{modularId,jdbcType=INTEGER},
+      </if>
+      <if test="modularName != null">
+        #{modularName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDictExample" resultType="java.lang.Long">
+    select count(*) from modular_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update modular_dict
+    <set>
+      <if test="record.modularId != null">
+        modular_id = #{record.modularId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modularName != null">
+        modular_name = #{record.modularName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update modular_dict
+    set modular_id = #{record.modularId,jdbcType=INTEGER},
+      modular_name = #{record.modularName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    update modular_dict
+    <set>
+      <if test="modularName != null">
+        modular_name = #{modularName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    update modular_dict
+    set modular_name = #{modularName,jdbcType=VARCHAR}
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    <id column="modular_id" jdbcType="INTEGER" property="modularId" />
+    <result column="modular_name" jdbcType="VARCHAR" property="modularName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    modular_id, modular_name
+  </sql>
+  <select id="selectByExample" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDictExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from modular_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from modular_dict
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from modular_dict
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDictExample">
+    delete from modular_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    insert into modular_dict (modular_id, modular_name)
+    values (#{modularId,jdbcType=INTEGER}, #{modularName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    insert into modular_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="modularId != null">
+        modular_id,
+      </if>
+      <if test="modularName != null">
+        modular_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="modularId != null">
+        #{modularId,jdbcType=INTEGER},
+      </if>
+      <if test="modularName != null">
+        #{modularName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDictExample" resultType="java.lang.Long">
+    select count(*) from modular_dict
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update modular_dict
+    <set>
+      <if test="record.modularId != null">
+        modular_id = #{record.modularId,jdbcType=INTEGER},
+      </if>
+      <if test="record.modularName != null">
+        modular_name = #{record.modularName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update modular_dict
+    set modular_id = #{record.modularId,jdbcType=INTEGER},
+      modular_name = #{record.modularName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    update modular_dict
+    <set>
+      <if test="modularName != null">
+        modular_name = #{modularName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.onlineplatform.proincorruptiblealliance.entity.ModularDict">
+    update modular_dict
+    set modular_name = #{modularName,jdbcType=VARCHAR}
+    where modular_id = #{modularId,jdbcType=INTEGER}
+  </update>
+</mapper>
